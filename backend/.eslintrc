@@ -1,32 +1,43 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json",
-    "tsconfigRootDir": "."
-  },
   "env": {
     "es6": true,
-    "browser": true,
+    "node": true,
     "jest": true
   },
-  "plugins": ["@typescript-eslint", "react-hooks", "prettier"],
+  "root": true,
+  "parserOptions": {
+    "sourceType": "module",
+    "tsconfigRootDir": ".",
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "import",
+    "prettier",
+    "react-hooks", 
+    "@typescript-eslint"
+  ],
+  "include": ["**/*.ts", "**/*.js"],
+  "parser": "@typescript-eslint/parser",
   "extends": [
-    "react-app",
     "airbnb",
     "prettier",
+    "react-app",
     "prettier/react",
-    "prettier/@typescript-eslint",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
     "plugin:react/recommended",
     "plugin:import/typescript",
-    "plugin:import/errors",
-    "plugin:import/warnings"
+    "prettier/@typescript-eslint",
+    "plugin:@typescript-eslint/recommended"
   ],
   "settings": {
     "react": {
       "version": "detect" /* Tells eslint-plugin-react to automatically detect the version of React to use */
     }
   },
+  "ignorePatterns": [
+    "/lib/**/*" // Ignore built files.
+  ],
   "rules": {
     "import/no-cycle": [2, { "maxDepth": 1 }],
     "lines-between-class-members": "off",
@@ -62,18 +73,19 @@
         ]
       }
     ],
-    "react/no-unescaped-entities": 0,
     "react/prop-types": "off",
+    "react/no-unescaped-entities": 0,
     "react/jsx-props-no-spreading": "off",
     "react-hooks/rules-of-hooks": "error",
     "prettier/prettier": [
       "error",
       {
-        "singleQuote": true,
         "semi": true,
-        "printWidth": 100
+        "printWidth": 100,
+        "singleQuote": true
       }
     ],
     "no-underscore-dangle": ["error", { "allow": ["__env__"] }]
-  }
+  },
+  
 }
