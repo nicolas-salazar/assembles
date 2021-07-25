@@ -1,8 +1,6 @@
 {
+
   "compilerOptions": {
-    "include": [
-      "./src"
-    ],
     "lib": [
       "dom",
       "esnext",
@@ -17,7 +15,6 @@
     "module": "esnext",
     "target": "es2017",
     "skipLibCheck": true,
-    "compileOnSave": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
@@ -25,4 +22,11 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
   }, 
+  "compileOnSave": true,
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+   "lib" 
+  ]
 }
