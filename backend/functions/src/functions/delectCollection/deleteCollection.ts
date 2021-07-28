@@ -1,25 +1,24 @@
-import { ENVIRONMENT } from '../../constants';
+import { checkAuth } from '../utils';
+import { ERROR_HANDLE } from '../../constants';
 import * as functions from 'firebase-functions';
+import { IDeleteCollection } from '../../interfaces';
 import { deleteCollectionIntoDB } from '../../models';
 
-const deleteCollection = functions.https.onCall(async (data, context) => {
-  if (process.env.ENV !== ENVIRONMENT.Develop) {
-    if (!context.auth) {
-      throw new functions.https.HttpsError('unauthenticated', 'Auth not found');
-    }
-  }
+enum RESPONSE_MESSAGE {
+  Success = 'Mocks deleted sucesfuly!',
+  Error = 'It was not possible to create the mock',
+}
 
+const deleteCollection = functions.https.onCall(async (data: IDeleteCollection, context) => {
   try {
+    checkAuth(context);
     const { collection } = data;
     await deleteCollectionIntoDB(collection);
     return {
-      message: 'Mocks deleted sucesfuly!',
+      message: RESPONSE_MESSAGE.Success,
     };
   } catch (error) {
-    throw new functions.https.HttpsError(
-      error.code || 'unknown',
-      error.message || 'It wasnt possible to create the mock'
-    );
+    return ERROR_HANDLE.unknown(error, RESPONSE_MESSAGE.Error);
   }
 });
 

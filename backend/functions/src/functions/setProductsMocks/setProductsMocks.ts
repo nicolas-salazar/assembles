@@ -1,25 +1,24 @@
-import { ENVIRONMENT } from '../../constants';
+import { checkAuth } from '../utils';
+import { ERROR_HANDLE } from '../../constants';
 import * as functions from 'firebase-functions';
+import { IProductMock } from '../../interfaces';
 import { setProductsMocksIntoDB } from '../../models';
 
-const setProductMocks = functions.https.onCall(async (data, context) => {
-  if (process.env.ENV !== ENVIRONMENT.Develop) {
-    if (!context.auth) {
-      throw new functions.https.HttpsError('unauthenticated', 'Auth not found');
-    }
-  }
+enum RESPONSE_MESSAGE {
+  Success = 'Mock created sucesfuly!',
+  Error = 'It was not possible to create the mock',
+}
 
+const setProductMocks = functions.https.onCall(async (data: IProductMock, context) => {
   try {
-    const { productMocks } = data;
-    await setProductsMocksIntoDB(productMocks);
+    checkAuth(context);
+    const { quantity } = data;
+    await setProductsMocksIntoDB(quantity);
     return {
-      message: 'Mock created sucesfuly!',
+      message: RESPONSE_MESSAGE.Success,
     };
   } catch (error) {
-    throw new functions.https.HttpsError(
-      error.code || 'unknown',
-      error.message || 'It wasnt possible to create the mock'
-    );
+    return ERROR_HANDLE.unknown(error, RESPONSE_MESSAGE.Error);
   }
 });
 
