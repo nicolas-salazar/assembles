@@ -1,7 +1,7 @@
 import { firestore } from 'firebase-admin';
-const firestoreDB = firestore();
 
 const deleteQueryBatch = async (query: any, resolve: any) => {
+  const firestoreDB = firestore();
   const snapshot = await query.get();
 
   const batchSize = snapshot.size;

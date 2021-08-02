@@ -1,9 +1,8 @@
 import { firestore } from 'firebase-admin';
 import deleteQueryBatch from './deleteQueryBatch';
 
-const firestoreDB = firestore();
-
 const deleteCollectionIntoDB = async (collectionPath: string) => {
+  const firestoreDB = firestore();
   try {
     const batchSize = 100;
     const collectionRef = firestoreDB.collection(collectionPath);

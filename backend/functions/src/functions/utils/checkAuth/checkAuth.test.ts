@@ -1,9 +1,11 @@
 import checkAuth from '.';
-import * as admin from 'firebase-admin';
 import { ERROR_MESSAGES } from '../../../constants/errors/errors';
 
-describe('Test - checkAuth', () => {
-  let adminStub: any = undefined;
+jest.mock('firebase-admin', () => ({
+  initializeApp: jest.fn(),
+}));
+
+describe('Utils - checkAuth', () => {
   const OLD_ENV = process.env;
 
   beforeEach(() => {
@@ -11,12 +13,7 @@ describe('Test - checkAuth', () => {
     process.env = { ...OLD_ENV };
   });
 
-  beforeAll(() => {
-    adminStub = jest.spyOn(admin, 'initializeApp');
-  });
-
   afterAll(() => {
-    adminStub.mockRestore();
     process.env = { ...OLD_ENV };
   });
 
