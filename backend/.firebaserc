@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "assembles-dev",
+    "develop": "assembles-dev",
+    "production": "assembles-757f3"
+  }
+}
