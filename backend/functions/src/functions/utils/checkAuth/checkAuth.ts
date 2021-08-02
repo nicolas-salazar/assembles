@@ -1,12 +1,15 @@
 import { ENVIRONMENT, ERROR_HANDLE } from '../../../constants';
 
-const checkAuth = (context: any) => {
-  if (process.env.ENV !== ENVIRONMENT.Develop) {
-    if (!context?.auth) {
-      ERROR_HANDLE.UnAuth();
-    }
+const checkAuth = (context: any): any => {
+  if (process.env.ENV === ENVIRONMENT.Develop) {
+    return;
   }
-  return;
+
+  if (context?.auth) {
+    return;
+  }
+
+  return ERROR_HANDLE.UnAuth();
 };
 
 export default checkAuth;

@@ -1,12 +1,12 @@
 import * as functions from 'firebase-functions';
 import { IFunctionsError } from '../../interfaces';
 
-enum ERROR_CODES {
+export enum ERROR_CODES {
   UnAuth = 'unauthenticated',
   Unknown = 'unknown',
 }
 
-enum ERROR_MESSAGES {
+export enum ERROR_MESSAGES {
   UnAuth = 'You are not authenticated 💔',
   Unknown = 'An unknown error has occurred 💔',
 }
