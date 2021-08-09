@@ -1,11 +1,12 @@
 export default interface IProduct {
   id: string;
   name: string;
-  available: number;
-  parentReference?: Array<any>;
-  childReference?: Array<any>;
   createdAt?: Date;
+  isMock?: boolean;
+  available: number;
   createdBy?: string;
   lastUpdatedAt?: Date;
   lastUpdatedBy?: string;
+  childReference?: Array<any>;
+  parentReference?: Array<any>;
 }

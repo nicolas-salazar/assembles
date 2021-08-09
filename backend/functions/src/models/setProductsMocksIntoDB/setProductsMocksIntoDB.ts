@@ -5,12 +5,17 @@ import getProductMock from './getProductMock';
 const setProductsMocksIntoDB = async (quantity?: number) => {
   const firestoreDB = firestore();
   try {
-    const mocks = getProductMock(quantity);
-    const creationPromise: Array<any> = [];
-    mocks.forEach((mockItem) => {
-      creationPromise.push(firestoreDB.collection(COLLECTIONS.Products).doc().set(mockItem));
+    const { parents, childs } = getProductMock(quantity);
+    parents.forEach(async (parent, index) => {
+      const childRef = firestoreDB.collection(COLLECTIONS.Products).doc();
+      const parentRef = firestoreDB.collection(COLLECTIONS.Products).doc();
+
+      await firestoreDB.runTransaction(async (transaction) => {
+        await transaction.set(childRef, { ...childs[index], parentReference: [parentRef] });
+        await transaction.set(parentRef, { ...parent, childReference: [childRef] });
+      });
     });
-    await Promise.all(creationPromise);
+
     return;
   } catch (error) {
     throw {

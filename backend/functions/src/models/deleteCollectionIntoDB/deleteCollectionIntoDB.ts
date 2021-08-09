@@ -1,12 +1,17 @@
 import { firestore } from 'firebase-admin';
 import deleteQueryBatch from './deleteQueryBatch';
 
-const deleteCollectionIntoDB = async (collectionPath: string) => {
+const deleteCollectionIntoDB = async (
+  collectionPath: string,
+  where?: { key: string; value: string | boolean | number }
+) => {
   const firestoreDB = firestore();
   try {
     const batchSize = 100;
     const collectionRef = firestoreDB.collection(collectionPath);
-    const query = collectionRef.orderBy('__name__').limit(batchSize);
+    const query = where
+      ? collectionRef.orderBy('__name__').where(where.key, '==', where.value).limit(batchSize)
+      : collectionRef.orderBy('__name__').limit(batchSize);
 
     return new Promise((resolve, reject) => {
       deleteQueryBatch(query, resolve).catch(reject);

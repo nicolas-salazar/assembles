@@ -2,21 +2,39 @@ import * as faker from 'faker';
 import { v4 as uuidv4 } from 'uuid';
 import { IProduct } from '../../../interfaces';
 
-const getProductMock = (quantity?: number): Array<IProduct> => {
-  const mocks = [];
+const getProductMock = (
+  quantity?: number
+): { parents: Array<IProduct>; childs: Array<IProduct> } => {
+  const childs = [];
+  const parents = [];
   const length = quantity || 1;
   for (let index = 0; index < length; index++) {
-    mocks.push({
+    parents.push({
       id: uuidv4(),
-      name: faker.commerce.productName(),
       available: 0,
+      isMock: true,
+      childReference: [],
+      parentReference: [],
       createdAt: new Date(),
-      createdBy: 'Mocker function',
       lastUpdatedAt: new Date(),
+      createdBy: 'Mocker function',
       lastUpdatedBy: 'Mocker function',
+      name: faker.commerce.productName(),
+    });
+    childs.push({
+      id: uuidv4(),
+      available: 0,
+      isMock: true,
+      childReference: [],
+      parentReference: [],
+      createdAt: new Date(),
+      lastUpdatedAt: new Date(),
+      createdBy: 'Mocker function',
+      lastUpdatedBy: 'Mocker function',
+      name: faker.commerce.productName(),
     });
   }
-  return mocks;
+  return { parents, childs };
 };
 
 export default getProductMock;

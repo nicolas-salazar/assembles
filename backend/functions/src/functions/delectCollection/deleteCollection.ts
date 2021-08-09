@@ -5,8 +5,8 @@ import { IDeleteCollection } from '../../interfaces';
 import { deleteCollectionIntoDB } from '../../models';
 
 enum RESPONSE_MESSAGE {
-  Success = 'Mocks deleted sucesfuly!',
-  Error = 'It was not possible to create the mock',
+  Success = 'Collection deleted sucesfuly!',
+  Error = 'It was not possible to delete the collection',
 }
 
 const deleteCollection = functions.https.onCall(async (data: IDeleteCollection, context) => {

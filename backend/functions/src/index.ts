@@ -6,6 +6,11 @@ admin.initializeApp({
 });
 
 import { deleteCollection, setProductsMocks } from './functions';
+import deleteMocks from './functions/deleteMocks';
 
+// Mocks Utils
+exports.deleteMocks = deleteMocks;
 exports.setProductMocks = setProductsMocks;
+
+// Data Managements
 exports.deleteCollection = deleteCollection;
