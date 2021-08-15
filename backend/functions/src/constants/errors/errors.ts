@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import * as functions from 'firebase-functions';
 import { IFunctionsError } from '../../interfaces';
 
@@ -18,7 +19,7 @@ const ERROR_HANDLE = {
   unknown: (error: IFunctionsError, customMessage?: string) => {
     throw new functions.https.HttpsError(
       error.code || ERROR_CODES.Unknown,
-      error.message || customMessage || ERROR_MESSAGES.UnAuth
+      error.message || customMessage || ERROR_MESSAGES.Unknown,
     );
   },
 };

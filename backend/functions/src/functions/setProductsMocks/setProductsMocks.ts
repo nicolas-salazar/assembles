@@ -1,6 +1,6 @@
+import * as functions from 'firebase-functions';
 import { checkAuth } from '../utils';
 import { ERROR_HANDLE } from '../../constants';
-import * as functions from 'firebase-functions';
 import { IProductMock } from '../../interfaces';
 import { setProductsMocksIntoDB } from '../../models';
 

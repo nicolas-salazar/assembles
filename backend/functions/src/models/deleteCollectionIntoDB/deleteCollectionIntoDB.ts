@@ -1,10 +1,11 @@
+/* eslint-disable no-throw-literal */
 import { firestore } from 'firebase-admin';
 import deleteQueryBatch from './deleteQueryBatch';
 
 const deleteCollectionIntoDB = async (
   collectionPath: string,
-  where?: { key: string; value: string | boolean | number }
-) => {
+  where?: { key: string; value: string | boolean | number },
+): Promise<any> => {
   const firestoreDB = firestore();
   try {
     const batchSize = 100;

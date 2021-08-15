@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 import { FunctionsErrorCode } from 'firebase-functions/lib/providers/https';
 
 export default interface IFunctionsError {

@@ -1,5 +1,6 @@
-import setProductMocks from '.';
+/* eslint-disable import/newline-after-import */
 import functions from 'firebase-functions-test';
+import setProductMocks from '.';
 const testFunction = functions();
 const wrappedFunction = testFunction.wrap(setProductMocks);
 

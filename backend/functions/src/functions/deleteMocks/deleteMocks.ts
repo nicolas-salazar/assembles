@@ -1,5 +1,5 @@
-import { ERROR_HANDLE } from '../../constants';
 import * as functions from 'firebase-functions';
+import { ERROR_HANDLE } from '../../constants';
 import { deleteCollectionIntoDB } from '../../models';
 import COLLECTION_WITH_MOCKS from '../../constants/collecitonsWithMock';
 import { checkAdminDev } from '../utils';
@@ -9,7 +9,7 @@ enum RESPONSE_MESSAGE {
   Error = 'It was not possible to delete the mocks collection',
 }
 
-const deleteMocks = functions.https.onCall(async (data, _context) => {
+const deleteMocks = functions.https.onCall(async (data) => {
   try {
     const { key } = data;
     checkAdminDev(key);

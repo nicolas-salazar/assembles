@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { IProduct } from '../../../interfaces';
 
 const getProductMock = (
-  quantity?: number
+  quantity?: number,
 ): { parents: Array<IProduct>; childs: Array<IProduct> } => {
   const childs = [];
   const parents = [];
@@ -11,7 +11,7 @@ const getProductMock = (
   for (let index = 0; index < length; index++) {
     parents.push({
       id: uuidv4(),
-      available: 0,
+      available: 1,
       isMock: true,
       childReference: [],
       parentReference: [],
@@ -23,7 +23,7 @@ const getProductMock = (
     });
     childs.push({
       id: uuidv4(),
-      available: 0,
+      available: 2,
       isMock: true,
       childReference: [],
       parentReference: [],

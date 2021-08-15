@@ -1,14 +1,20 @@
-{
+module.exports = {
   "env": {
     "es6": true,
     "node": true,
     "jest": true
   },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "root": true,
   "parserOptions": {
-    "sourceType": "module",
-    "tsconfigRootDir": ".",
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": __dirname,
   },
   "plugins": [
     "import",
@@ -16,25 +22,17 @@
     "react-hooks", 
     "@typescript-eslint"
   ],
-  "include": ["**/*.ts", "**/*.js"],
+  // "include": ["src/**/*.ts", "src/**/*.js"],
   "parser": "@typescript-eslint/parser",
   "extends": [
-    "airbnb",
-    "prettier",
-    "react-app",
-    "prettier/react",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:react/recommended",
     "plugin:import/typescript",
-    "prettier/@typescript-eslint",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "airbnb"
   ],
-  "settings": {
-    "react": {
-      "version": "detect" /* Tells eslint-plugin-react to automatically detect the version of React to use */
-    }
-  },
   "ignorePatterns": [
     "/lib/**/*" // Ignore built files.
   ],
@@ -85,7 +83,7 @@
         "singleQuote": true
       }
     ],
-    "no-underscore-dangle": ["error", { "allow": ["__env__"] }]
-  },
-  
+    "no-underscore-dangle": ["error", { "allow": ["__env__"] }],
+    "comma-dangle": [2, "always-multiline"] ,
+  }
 }

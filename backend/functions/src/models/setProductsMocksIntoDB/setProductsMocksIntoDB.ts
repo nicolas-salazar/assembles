@@ -1,18 +1,21 @@
+/* eslint-disable no-throw-literal */
 import { firestore } from 'firebase-admin';
 import { COLLECTIONS } from '../../constants';
 import getProductMock from './getProductMock';
 
-const setProductsMocksIntoDB = async (quantity?: number) => {
+const setProductsMocksIntoDB = async (quantity?: number): Promise<void> => {
   const firestoreDB = firestore();
   try {
     const { parents, childs } = getProductMock(quantity);
     parents.forEach(async (parent, index) => {
       const childRef = firestoreDB.collection(COLLECTIONS.Products).doc();
       const parentRef = firestoreDB.collection(COLLECTIONS.Products).doc();
-
       await firestoreDB.runTransaction(async (transaction) => {
         await transaction.set(childRef, { ...childs[index], parentReference: [parentRef] });
-        await transaction.set(parentRef, { ...parent, childReference: [childRef] });
+        await transaction.set(parentRef, {
+          ...parent,
+          childReference: [{ reference: childRef, quantity: 2, id: childRef.id }],
+        });
       });
     });
 
